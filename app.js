@@ -696,13 +696,22 @@ function saveSettingsLocalOnly() {
   localStorage.setItem("gstools_pin", state.adminPin);
   localStorage.setItem("gstools_currency", state.currency);
 }
+function orderToCloudRow(order) {
+  return { order_code: String(order.id), data: order, status: order.status || "pending", total: Number(order.grandTotal) || 0, customer_name: order.customer?.name || "", phone: order.customer?.phone || "", items: order.items || [] };
+}
 async function syncOrdersToSupabase() {
+  const { data: sessionData } = await gsSupabase.auth.getSession();
+  if (!sessionData.session) return false;
   const { error } = await gsSupabase.from("gstools_orders").upsert(
-    state.orders.map(order => ({ order_code: String(order.id), data: order, status: order.status || "pending", total: Number(order.grandTotal) || 0, customer_name: order.customer?.name || "", phone: order.customer?.phone || "", items: order.items || [] })),
-    { onConflict: "order_code" }
+    state.orders.map(orderToCloudRow), { onConflict: "order_code" }
   );
   if (error) { console.error("Supabase orders sync error:", error.message); return false; }
   return true;
+}
+async function submitOrderToCloud(order) {
+  const { error } = await gsSupabase.from("gstools_orders").insert(orderToCloudRow(order));
+  if (error) console.error("Supabase order insert error:", error.message);
+  return !error;
 }
 async function loadOrdersFromSupabase() {
   const { data, error } = await gsSupabase.from("gstools_orders").select("data").order("created_at", { ascending: false });
@@ -1544,6 +1553,9 @@ ${discountAmount > 0 ? `• خصم الكوبون (${state.activeCoupon}): -${di
 
   state.orders.unshift(orderRecord);
   saveOrders();
+  submitOrderToCloud(orderRecord).then(ok => {
+    if (!ok) console.warn("Order remains in this browser only until Supabase order permissions are configured.");
+  });
 
   // Button Animation Feedback
   const submitBtn = document.getElementById("btnConfirmOrder");
