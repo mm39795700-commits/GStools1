@@ -10,7 +10,13 @@ const DEFAULT_PHONE = "201019688435"; // Brand Official WhatsApp: +201019688435
 const DEFAULT_PIN = "1234";
 const DEFAULT_CURRENCY = "ج.م";
 const CATALOG_VERSION = "4.0"; // Bumped to 4.0 for real prices and all 5 categories
+const SUPABASE_URL = "https://pbbghmjvckgafnfrpiuu.supabase.co";
+const SUPABASE_KEY = "sb_publishable_YkIZ76gzGCglPN0bGx4Uiw_IN9Ckj53";
 
+const gsSupabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 const INITIAL_PRODUCTS = [
   // ==========================================
   // --- 1. أوقية اليد (Hand Wraps & Gloves / قفازات وأربطة) ---
@@ -651,8 +657,58 @@ function saveSettings() {
   localStorage.setItem("gstools_phone", state.storePhone);
   localStorage.setItem("gstools_pin", state.adminPin);
   localStorage.setItem("gstools_currency", state.currency);
-}
+} 
+async function syncProductsToSupabase() {
+  const { error } = await gsSupabase
+    .from("gstools_products")
+    .upsert(
+      state.products.map(product => ({
+        id: String(product.id),
+        name: product.name || "",
+        price: Number(product.price) || 0,
+        image_url: product.image || null,
+        stock: Number(product.stock) || 0,
+        description: product.description || "",
+        active: true,
+        data: product
+      })),
+      { onConflict: "id" }
+    );
 
+  if (error) {
+    console.error("Supabase sync error:", error.message);
+    return false;
+  }
+
+  return true;
+}
+async function loadProductsFromSupabase() {
+  const { data, error } = await gsSupabase
+    .from("gstools_products")
+    .select("data, active")
+    .eq("active", true);
+
+  if (error) {
+    console.error("Supabase load error:", error.message);
+    return false;
+  }
+
+  if (data && data.length > 0) {
+    state.products = data
+      .map(row => row.data)
+      .filter(product => product && product.id);
+
+    localStorage.setItem(
+      "gstools_products",
+      JSON.stringify(state.products)
+    );
+
+    renderProducts();
+    return true;
+  }
+
+  return false;
+}
 // ==========================================
 // 3. Audio Synthesizer (Zero External Files)
 // ==========================================
