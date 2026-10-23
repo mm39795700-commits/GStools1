@@ -646,6 +646,10 @@ function loadSavedState() {
 
 function saveProducts() {
   localStorage.setItem("gstools_products", JSON.stringify(state.products));
+  // Sync only when the owner is authenticated in Supabase.
+  gsSupabase.auth.getSession().then(({ data }) => {
+    if (data.session) syncProductsToSupabase();
+  }).catch(error => console.error("Supabase session check failed:", error));
 }
 function saveCart() {
   localStorage.setItem("gstools_cart", JSON.stringify(state.cart));
@@ -1727,15 +1731,40 @@ function clearPin() {
   playSound("click");
 }
 
-function verifyAdminPin() {
+async function verifyAdminPin() {
   const pinInput = document.getElementById("adminPinInput");
   if (!pinInput) return;
 
   if (pinInput.value === state.adminPin) {
-    closeAdminAuthModal();
-    openAdminDashboard();
-    playSound("success");
-    showToast("تم فتح لوحة تحكم GStools بنجاح! 🦁");
+    try {
+      let { data: sessionData, error: sessionError } = await gsSupabase.auth.getSession();
+      if (sessionError) throw sessionError;
+
+      if (!sessionData.session) {
+        const email = window.prompt("أدخل البريد الإلكتروني لحساب Supabase الخاص بمالك المتجر:");
+        if (!email) return;
+        const password = window.prompt("أدخل كلمة مرور حساب Supabase:");
+        if (!password) return;
+
+        const result = await gsSupabase.auth.signInWithPassword({ email: email.trim(), password });
+        if (result.error) throw result.error;
+        sessionData = { session: result.data.session };
+      }
+
+      const loaded = await loadProductsFromSupabase();
+      if (!loaded) {
+        const synced = await syncProductsToSupabase();
+        if (!synced) throw new Error("تعذر حفظ المنتجات في قاعدة البيانات. راجع سياسات Supabase.");
+      }
+
+      closeAdminAuthModal();
+      openAdminDashboard();
+      playSound("success");
+      showToast("تم فتح لوحة التحكم وربط المنتجات بقاعدة البيانات ✅");
+    } catch (error) {
+      console.error("GStools admin/Supabase error:", error);
+      showToast("تعذر الاتصال بحساب Supabase. راجع البريد وكلمة المرور وسياسات قاعدة البيانات.", "error");
+    }
   } else {
     playSound("punch");
     showToast("الرمز السري غير صحيح!", "error");
@@ -2497,8 +2526,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // 1. Load Persistence
   loadSavedState();
 
-  // 2. Render UI
+  // 2. Render local UI immediately; replace with cloud catalog when available.
   renderProducts();
+  loadProductsFromSupabase().catch(error => console.error("Supabase catalog load failed:", error));
   updateCartBadge();
   updateSoundIcon();
   initAdminImagePresets();
