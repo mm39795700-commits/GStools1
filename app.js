@@ -2030,15 +2030,38 @@ function toggleProductStock(id) {
   showToast(`تم تحديث حالة توفر "${product.name}"`);
 }
 
-function deleteProduct(id) {
+async function deleteProduct(id) {
   if (!confirm("هل أنت متأكد من حذف هذا المنتج نهائياً من المتجر؟")) return;
-  state.products = state.products.filter(p => p.id !== id);
-  saveProducts();
+  const product = state.products.find(p => String(p.id) === String(id));
+  if (!product) return;
+
+  // Require an authenticated owner session before changing the shared catalog.
+  const { data: sessionData, error: sessionError } = await gsSupabase.auth.getSession();
+  if (sessionError || !sessionData.session) {
+    showToast("سجّل دخول حساب مالك Supabase قبل حذف المنتجات.", "error");
+    console.error("GStools delete: owner session missing", sessionError);
+    return;
+  }
+
+  // Mark inactive in the cloud first; only update the UI after Supabase confirms.
+  const { error } = await gsSupabase
+    .from("gstools_products")
+    .update({ active: false, updated_at: new Date().toISOString() })
+    .eq("id", String(id));
+
+  if (error) {
+    console.error("GStools product deletion rejected by Supabase:", error);
+    showToast("لم يتم الحذف من قاعدة البيانات. افتح Console لمعرفة خطأ Supabase.", "error");
+    return;
+  }
+
+  state.products = state.products.filter(p => String(p.id) !== String(id));
+  localStorage.setItem("gstools_products", JSON.stringify(state.products));
   renderAdminProductsTable();
   renderAdminKPIs();
   renderProducts();
   playSound("punch");
-  showToast("تم حذف المنتج من المتجر بنجاح");
+  showToast("تم حذف المنتج من المتجر وقاعدة البيانات.");
 }
 
 let editingProductId = null;
