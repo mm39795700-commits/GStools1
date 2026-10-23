@@ -760,7 +760,8 @@ async function syncProductsToSupabase() {
   }
 
   // Reconcile deletions too: remove cloud products that no longer exist locally.
-  const { data: cloudRows, error: readError } = await gsSupabase.from("gstools_products").select("id");
+  const { data: cloudRows, error: readError } = await gsSupabase
+    .from("gstools_products").select("id").eq("active", true);
   if (readError) {
     console.error("Supabase product list sync error:", readError.message);
     return false;
@@ -768,9 +769,11 @@ async function syncProductsToSupabase() {
   const keepIds = new Set(rows.map(row => String(row.id)));
   const deletedIds = (cloudRows || []).map(row => String(row.id)).filter(id => !keepIds.has(id));
   for (const id of deletedIds) {
-    const { error } = await gsSupabase.from("gstools_products").delete().eq("id", id);
+    // Soft-delete: public catalog only loads active rows; avoids depending on DELETE policy.
+    const { error } = await gsSupabase.from("gstools_products")
+      .update({ active: false, updated_at: new Date().toISOString() }).eq("id", id);
     if (error) {
-      console.error("Supabase product deletion sync error:", error.message);
+      console.error("Supabase product soft-delete error:", error.message);
       return false;
     }
   }
@@ -829,21 +832,14 @@ async function loadProductsFromSupabase() {
     return false;
   }
 
-  if (data && data.length > 0) {
-    state.products = data
-      .map(row => row.data)
-      .filter(product => product && product.id);
+  // The cloud catalog is authoritative, including when it is empty.
+  state.products = (data || [])
+    .map(row => row.data)
+    .filter(product => product && product.id);
 
-    localStorage.setItem(
-      "gstools_products",
-      JSON.stringify(state.products)
-    );
-
-    renderProducts();
-    return true;
-  }
-
-  return false;
+  localStorage.setItem("gstools_products", JSON.stringify(state.products));
+  renderProducts();
+  return true;
 }
 // ==========================================
 // 3. Audio Synthesizer (Zero External Files)
