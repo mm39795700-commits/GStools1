@@ -702,10 +702,22 @@ function orderToCloudRow(order) {
 async function syncOrdersToSupabase() {
   const { data: sessionData } = await gsSupabase.auth.getSession();
   if (!sessionData.session) return false;
-  const { error } = await gsSupabase.from("gstools_orders").upsert(
-    state.orders.map(orderToCloudRow), { onConflict: "order_code" }
-  );
-  if (error) { console.error("Supabase orders sync error:", error.message); return false; }
+
+  const rows = state.orders.map(orderToCloudRow);
+  if (rows.length) {
+    const { error } = await gsSupabase.from("gstools_orders").upsert(rows, { onConflict: "order_code" });
+    if (error) { console.error("Supabase orders sync error:", error.message); return false; }
+  }
+
+  // Reconcile deletions so removed orders stay removed after reloads and on other devices.
+  const { data: cloudRows, error: readError } = await gsSupabase.from("gstools_orders").select("order_code");
+  if (readError) { console.error("Supabase order list sync error:", readError.message); return false; }
+  const keepCodes = new Set(rows.map(row => String(row.order_code)));
+  const deletedCodes = (cloudRows || []).map(row => String(row.order_code)).filter(code => !keepCodes.has(code));
+  for (const code of deletedCodes) {
+    const { error } = await gsSupabase.from("gstools_orders").delete().eq("order_code", code);
+    if (error) { console.error("Supabase order deletion sync error:", error.message); return false; }
+  }
   return true;
 }
 async function submitOrderToCloud(order) {
@@ -725,27 +737,43 @@ async function loadOrdersFromSupabase() {
   return true;
 } 
 async function syncProductsToSupabase() {
-  const { error } = await gsSupabase
-    .from("gstools_products")
-    .upsert(
-      state.products.map(product => ({
-        id: String(product.id),
-        name: product.name || "",
-        price: Number(product.price) || 0,
-        image_url: product.image || null,
-        stock: Number(product.stock) || 0,
-        description: product.description || "",
-        active: true,
-        data: product
-      })),
-      { onConflict: "id" }
-    );
+  const { data: sessionData } = await gsSupabase.auth.getSession();
+  if (!sessionData.session) return false;
 
-  if (error) {
-    console.error("Supabase sync error:", error.message);
-    return false;
+  const rows = state.products.map(product => ({
+    id: String(product.id),
+    name: product.name || "",
+    price: Number(product.price) || 0,
+    image_url: product.image || null,
+    stock: Number(product.stock) || 0,
+    description: product.description || "",
+    active: true,
+    data: product
+  }));
+
+  if (rows.length) {
+    const { error } = await gsSupabase.from("gstools_products").upsert(rows, { onConflict: "id" });
+    if (error) {
+      console.error("Supabase product sync error:", error.message);
+      return false;
+    }
   }
 
+  // Reconcile deletions too: remove cloud products that no longer exist locally.
+  const { data: cloudRows, error: readError } = await gsSupabase.from("gstools_products").select("id");
+  if (readError) {
+    console.error("Supabase product list sync error:", readError.message);
+    return false;
+  }
+  const keepIds = new Set(rows.map(row => String(row.id)));
+  const deletedIds = (cloudRows || []).map(row => String(row.id)).filter(id => !keepIds.has(id));
+  for (const id of deletedIds) {
+    const { error } = await gsSupabase.from("gstools_products").delete().eq("id", id);
+    if (error) {
+      console.error("Supabase product deletion sync error:", error.message);
+      return false;
+    }
+  }
   return true;
 }
 async function uploadProductImageIfNeeded(imageValue) {
