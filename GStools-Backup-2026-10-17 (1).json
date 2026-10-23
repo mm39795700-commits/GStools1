@@ -1,0 +1,598 @@
+{
+  "products": [
+    {
+      "id": "gs-hand-1495",
+      "name": "tiger واقي يد",
+      "nameEn": "tiger gloves",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "WhatsApp Image 2026-10-18 at 12.14.06 AM (2).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-leg-5756",
+      "name": "واقي رجل Excalibur",
+      "nameEn": "leg Excalibur",
+      "category": "leg",
+      "categoryLabel": "أوقية الرجل",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "WhatsApp Image 2026-10-18 at 12.14.06 AM.jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-head-4792",
+      "name": "واقي راسyango",
+      "nameEn": "hed yango",
+      "category": "head",
+      "categoryLabel": "أوقية الرأس",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "WhatsApp Image 2026-10-18 at 12.14.06 AM (1).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-leg-9389",
+      "name": "Excalibur واقي رجل",
+      "nameEn": "Excalibur leg",
+      "category": "leg",
+      "categoryLabel": "أوقية الرجل",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image.jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-head-1048",
+      "name": "m.reda واقي يد",
+      "nameEn": "m.reda gloves",
+      "category": "head",
+      "categoryLabel": "أوقية الرأس",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (15).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-1417",
+      "name": "واقي يد Excalibur",
+      "nameEn": "gloves Excalibur",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (14).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-2065",
+      "name": "walen واقي يد",
+      "nameEn": "gloves walen",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (12).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-9361",
+      "name": "واقي يد twins",
+      "nameEn": "gloves twins",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (11).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-3900",
+      "name": "واقي يد Excalibur",
+      "nameEn": "gloves Excalibur",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (10).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-6931",
+      "name": "واقي يد tiger",
+      "nameEn": "gloves tiger",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (9).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-1641",
+      "name": "واقي يد Excalibur",
+      "nameEn": "gloves Excalibur",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (6).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-4490",
+      "name": "واقي يد",
+      "nameEn": "gloves",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (5).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-3473",
+      "name": "واقي يد",
+      "nameEn": "gloves",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (4).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-leg-1723",
+      "name": "واقي رجل Excalibur",
+      "nameEn": "Excalibur leg",
+      "category": "leg",
+      "categoryLabel": "أوقية الرجل",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (3).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-0525",
+      "name": "classic واقي يد",
+      "nameEn": "classic gloves",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (2).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-8130",
+      "name": "واقي يد twins",
+      "nameEn": "twins gloves",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Gemini_Generated_Image (1).jpeg",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-5185",
+      "name": "واقيExcalibur",
+      "nameEn": "Excalibur Gold-Dot Boxing Glove",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Excalibur Gold-Dot Boxing Glove.png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-3418",
+      "name": "واقيExcalibur",
+      "nameEn": "Excalibur Fight Better Boxing Glove",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Excalibur Fight Better Boxing Glove.png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-4558",
+      "name": "واقيExcalibur",
+      "nameEn": "Excalibur Blue Boxing Glove",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Excalibur Blue Boxing Glove.png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-4938",
+      "name": "ولقي يد",
+      "nameEn": "Classic Black-and-White Boxing Glove",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Classic Black-and-White Boxing Glove.png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-0642",
+      "name": "واقيYALON",
+      "nameEn": "Blue YALON Boxing Glove",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Blue YALON Boxing Glove.png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-2033",
+      "name": "واقي Excalibur",
+      "nameEn": "Blue Excalibur Boxing Glove",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Blue Excalibur Boxing Glove.png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-5315",
+      "name": "واقي Top King",
+      "nameEn": "Black Top King Boxing Glove",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Black Top King Boxing Glove.png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-9379",
+      "name": "واقيTOPKING",
+      "nameEn": "Black TOPKING Boxing Glove",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Black TOPKING Boxing Glove.png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-8099",
+      "name": "واقي  Excalibur",
+      "nameEn": "Red Excalibur Boxing",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Red Excalibur Boxing Glove.png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-7972",
+      "name": "واقي Excalibur",
+      "nameEn": "White  Boxing Glove",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "White Excalibur Boxing Glove (1).png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-1359",
+      "name": "واقي ابيض وزهبي",
+      "nameEn": "White and Gold Boxing Glove",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "White and Gold Boxing Glove.png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    },
+    {
+      "id": "gs-hand-1565",
+      "name": "واقي توب كينج",
+      "nameEn": "Top King Boxing Glove",
+      "category": "hand",
+      "categoryLabel": "أوقية اليد",
+      "price": 0,
+      "oldPrice": null,
+      "rating": 5,
+      "reviews": 1,
+      "badge": "جديد ⭐",
+      "badgeType": "gold",
+      "image": "Black and Gold Top King Boxing Glove.png",
+      "sizes": [
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "description": "",
+      "inStock": true
+    }
+  ],
+  "orders": [],
+  "settings": {
+    "phone": "01062397850",
+    "currency": "ج.م"
+  },
+  "exportDate": "2026-10-17T21:17:02.975Z"
+}

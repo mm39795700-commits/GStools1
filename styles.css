@@ -1,0 +1,250 @@
+/* ==========================================================================
+   GStools - Elite Combat Sports Theme & Custom Animations
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;900&family=Rajdhani:wght@600;700&display=swap');
+
+:root {
+  --bg-dark: #08080a;
+  --bg-card: #121216;
+  --bg-card-hover: #181820;
+  --gold-primary: #d4af37;
+  --gold-light: #f5e7a9;
+  --gold-dark: #997a15;
+  --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+  --gold-glow: 0 0 25px rgba(212, 175, 55, 0.45);
+  --crimson-glow: 0 0 25px rgba(239, 68, 68, 0.4);
+  --steel: #8a9ba8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Cairo', 'Tajawal', sans-serif;
+  background-color: var(--bg-dark);
+  color: #f3f4f6;
+  overflow-x: hidden;
+  direction: rtl;
+  text-align: right;
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0d11;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a35;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* Gold Gradient Text & Elements */
+.text-gold-gradient {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.bg-gold-gradient {
+  background: var(--gold-gradient);
+}
+
+.border-gold-gradient {
+  border-image: var(--gold-gradient) 1;
+}
+
+/* Metallic Shimmer Effect */
+.shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-sweep::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 215, 0, 0.2) 50%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  transform: rotate(30deg);
+  animation: shimmerAnim 4s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes shimmerAnim {
+  0% { transform: translateX(-100%) rotate(30deg); }
+  100% { transform: translateX(100%) rotate(30deg); }
+}
+
+/* Glowing Pulsing Rings for Logo */
+.pulse-ring {
+  position: relative;
+}
+.pulse-ring::before,
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(212, 175, 55, 0.6);
+  animation: pulseRings 2.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  pointer-events: none;
+}
+.pulse-ring::after {
+  inset: -16px;
+  border-color: rgba(212, 175, 55, 0.3);
+  animation-delay: 0.9s;
+}
+
+@keyframes pulseRings {
+  0% { transform: scale(0.92); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 0.3; }
+  100% { transform: scale(1.18); opacity: 0; }
+}
+
+/* 3D Floating Logo */
+.floating-logo {
+  animation: floatBrand 4s ease-in-out infinite;
+  filter: drop-shadow(0 10px 25px rgba(212, 175, 55, 0.35));
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+.floating-logo:hover {
+  transform: scale(1.05) translateY(-5px);
+  filter: drop-shadow(0 15px 35px rgba(212, 175, 55, 0.65));
+}
+
+@keyframes floatBrand {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+/* Card 3D Tilt & Lighting */
+.product-card {
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+.product-card:hover {
+  transform: translateY(-7px) scale(1.015);
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(212, 175, 55, 0.25);
+  border-color: rgba(212, 175, 55, 0.6) !important;
+}
+
+/* Glow Badges */
+.badge-gold {
+  background: rgba(212, 175, 55, 0.15);
+  color: #f7e7a8;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+.badge-crimson {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+/* Neon Combat Button */
+.btn-combat {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+.btn-combat:hover {
+  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+  transform: translateY(-2px);
+}
+.btn-combat:active {
+  transform: translateY(1px);
+}
+
+/* Modal and Drawer Backdrop & Transitions */
+.modal-backdrop {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(4, 4, 6, 0.82);
+  transition: opacity 0.3s ease;
+}
+
+.cart-drawer {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Canvas overlay */
+#heroCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* High impact numbers */
+.num-combat {
+  font-family: 'Rajdhani', 'Cairo', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Custom Checkbox / Radio in Admin */
+.custom-input {
+  background: #15151c;
+  border: 1px solid #2a2a38;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+.custom-input:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  outline: none;
+}
+
+/* Animations */
+@keyframes shakeAlert {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+.shake {
+  animation: shakeAlert 0.4s ease-in-out;
+}
+
+/* Drag & Drop Upload Zone */
+.dropzone-combat {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dropzone-combat:hover {
+  border-color: #d4af37 !important;
+  background-color: rgba(212, 175, 55, 0.05);
+}
+.dropzone-combat.dragover {
+  border-color: #f5e7a9 !important;
+  background-color: rgba(212, 175, 55, 0.15) !important;
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), inset 0 0 15px rgba(212, 175, 55, 0.2);
+}
+.dropzone-pulse {
+  animation: dropPulse 2s infinite ease-in-out;
+}
+@keyframes dropPulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.08); opacity: 1; }
+}

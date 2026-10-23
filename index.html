@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GStools | متجر النخبة لعتاد وأوقية الفنون القتالية</title>
+  <meta name="description" content="GStools - العلامة الرائدة في معدات فنون القتال: قفازات ملاكمة، واقيات ساق، واقيات أسنان، وخوذات حماية مصممة للأبطال." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            combat: {
+              black: '#08080a',
+              dark: '#111115',
+              card: '#16161d',
+              border: '#262633',
+              gold: '#d4af37',
+              goldLight: '#f5e7a9',
+              goldDark: '#997a15',
+              crimson: '#ef4444',
+              steel: '#8a9ba8'
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+            combatNum: ['Rajdhani', 'Cairo', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./styles.css" />
+
+  <style>
+    /* Gold metallic text glow */
+    .gold-glow-text {
+      text-shadow: 0 0 15px rgba(212, 175, 55, 0.5), 0 0 30px rgba(212, 175, 55, 0.25);
+    }
+    .combat-grid-bg {
+      background-image: radial-gradient(rgba(212, 175, 55, 0.08) 1px, transparent 0);
+      background-size: 28px 28px;
+    }
+  </style>
+</head>
+
+<body class="bg-combat-black text-zinc-100 font-cairo antialiased selection:bg-amber-500 selection:text-black">
+
+  <!-- =========================================================================
+  <div class="bg-gradient-to-r from-zinc-950 via-amber-950/60 to-zinc-950 border-b border-amber-500/20 py-2 px-4 text-center text-xs font-bold text-amber-300 flex items-center justify-center gap-3">
+    <span>🔥 عتاد أصلي 100% لأبطال النزال والفنون القتالية</span>
+    <span class="hidden sm:inline text-zinc-600">|</span>
+    <span class="hidden sm:inline">🚚 شحن سريع لكافة المحافظات</span>
+    <span class="hidden md:inline text-zinc-600">|</span>
+    <span class="hidden md:inline">⚡ طلب مباشر وتأكيد فوري عبر واتساب</span>
+  </div>
+
+  <!-- =========================================================================
+       2. HEADER & NAVIGATION BAR
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-combat-black/90 backdrop-blur-md border-b border-zinc-800/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo & Brand Name -->
+      <a href="#hero" class="flex items-center gap-3.5 group cursor-pointer" onclick="playSound('punch')">
+        <div class="relative w-12 h-12 rounded-xl overflow-hidden pulse-ring bg-zinc-900 border border-amber-500/50 flex items-center justify-center shadow-lg shadow-amber-500/10">
+          <img 
+            src="./assets/logo.jpeg" 
+            alt="GStools Logo" 
+            onerror="this.src='./assets/logo-alt.jpeg'"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" 
+          />
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="text-2xl sm:text-3xl font-black tracking-wider text-gold-gradient gold-glow-text font-combatNum">
+              GStools
+            </span>
+            <span class="text-[10px] font-black bg-amber-500 text-black px-1.5 py-0.5 rounded shadow">PRO</span>
+          </div>
+          <span class="text-[11px] font-bold text-zinc-400 tracking-wide">
+            عتاد أبطال فنون القتال
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center gap-8 text-sm font-extrabold text-zinc-300">
+        <a href="#hero" class="hover:text-amber-400 transition-colors" onclick="playSound('click')">الرئيسية</a>
+        <a href="#categories" class="hover:text-amber-400 transition-colors" onclick="playSound('click')">الأقسام</a>
+        <a href="#products" class="hover:text-amber-400 transition-colors" onclick="playSound('click')">المنتجات</a>
+        <a href="javascript:void(0)" onclick="toggleSizeGuideModal(true)" class="hover:text-amber-400 text-amber-400/90 flex items-center gap-1 transition-colors">
+          <span>📏 دليل المقاسات</span>
+        </a>
+        <a href="#why-gstools" class="hover:text-amber-400 transition-colors" onclick="playSound('click')">لماذا GStools؟</a>
+        <a href="#faq" class="hover:text-amber-400 transition-colors" onclick="playSound('click')">الأسئلة الشائعة</a>
+      </nav>
+
+      <!-- Action Utilities: Sound, Search, Cart, Mobile Toggle -->
+      <div class="flex items-center gap-3">
+        
+        <!-- Sound Effect Toggle -->
+        <button 
+          id="soundToggleBtn" 
+          onclick="toggleSound()" 
+          class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-amber-400 hover:border-amber-500/50 flex items-center justify-center text-lg transition-all"
+          title="تفعيل/كتم الصوت"
+        >
+          🔊
+        </button>
+
+        <!-- Search Jump Button -->
+        <a 
+          href="#products" 
+          onclick="document.getElementById('searchInput')?.focus(); playSound('click');" 
+          class="hidden sm:flex w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-amber-400 hover:border-amber-500/50 items-center justify-center text-sm transition-all"
+          title="بحث في العتاد"
+        >
+          🔍
+        </a>
+
+        <!-- Cart Button with Live Badge -->
+        <button 
+          onclick="toggleCartDrawer(true)" 
+          class="relative flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-black text-sm transition-all shadow-lg shadow-amber-500/20 active:scale-95 cursor-pointer"
+        >
+          <span class="text-base">🛒</span>
+          <span class="hidden sm:inline">السلة</span>
+          <span 
+            id="cartCountBadge" 
+            class="hidden w-5 h-5 rounded-full bg-black text-amber-300 text-xs font-black flex items-center justify-center border border-amber-400 transition-transform"
+          >
+            0
+          </span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button 
+          onclick="document.getElementById('mobileMenu').classList.toggle('hidden'); playSound('click');" 
+          class="lg:hidden w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 flex items-center justify-center text-xl"
+        >
+          ☰
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-zinc-950 border-b border-zinc-800 px-4 py-4 space-y-3">
+      <a href="#hero" class="block text-sm font-bold text-zinc-300 hover:text-amber-400 py-1" onclick="document.getElementById('mobileMenu').classList.add('hidden')">الرئيسية</a>
+      <a href="#categories" class="block text-sm font-bold text-zinc-300 hover:text-amber-400 py-1" onclick="document.getElementById('mobileMenu').classList.add('hidden')">الأقسام والعتاد</a>
+      <a href="#products" class="block text-sm font-bold text-zinc-300 hover:text-amber-400 py-1" onclick="document.getElementById('mobileMenu').classList.add('hidden')">كافة المنتجات</a>
+      <a href="javascript:void(0)" onclick="toggleSizeGuideModal(true); document.getElementById('mobileMenu').classList.add('hidden');" class="block text-sm font-bold text-amber-400 py-1">📏 دليل المقاسات</a>
+      <a href="#why-gstools" class="block text-sm font-bold text-zinc-300 hover:text-amber-400 py-1" onclick="document.getElementById('mobileMenu').classList.add('hidden')">عن GStools</a>
+      <a href="#faq" class="block text-sm font-bold text-zinc-300 hover:text-amber-400 py-1" onclick="document.getElementById('mobileMenu').classList.add('hidden')">الأسئلة الشائعة</a>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       3. HERO SECTION WITH SPARKS CANVAS & 3D LOGO
+       ========================================================================= -->
+  <section id="hero" class="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-zinc-800/80 combat-grid-bg">
+    <!-- Interactive Canvas Particles -->
+    <canvas id="heroCanvas"></canvas>
+
+    <!-- Glowing Background Aura -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+      
+      <!-- Animated Floating Brand Emblem -->
+      <div class="mb-8 inline-block">
+        <div class="relative p-2.5 rounded-3xl bg-gradient-to-b from-amber-500/40 via-zinc-900 to-black border-2 border-amber-500/60 shadow-2xl pulse-ring floating-logo">
+          <img 
+            src="./assets/logo.jpeg" 
+            alt="GStools Brand Crest" 
+            onerror="this.src='./assets/logo-alt.jpeg'"
+            class="w-32 h-32 sm:w-40 sm:h-40 object-cover rounded-2xl shadow-inner" 
+          />
+          <div class="shimmer-sweep absolute inset-0 rounded-2xl pointer-events-none"></div>
+        </div>
+      </div>
+
+      <!-- Hero Headlines -->
+      <!-- <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs sm:text-sm font-black mb-6 animate-pulse"> -->
+        <!-- <span>🦁 أداء النخبة للنزالات العنيفة والتدريب الاحترافي</span> -->
+      <!-- </div> -->
+
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-tight mb-6 max-w-4xl mx-auto">
+        قوة، حماية، وأداء بلا حدود <br />
+        <span class="text-gold-gradient gold-glow-text">لأبطال فنون القتال</span>
+      </h1>
+
+      <p class="text-base sm:text-lg text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+        علامة <strong class="text-amber-400">GStools</strong> تقدم للمقاتلين عتاداً فولاذياً فائق الجودة، مصمم بتقنيات امتصاص الصدمات المزدوجة لحماية اليد، الساق، الفم، والرأس في أقوى النزالات.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+        <a 
+          href="#products" 
+          onclick="playSound('punch')"
+          class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-black font-black text-base shadow-xl shadow-amber-500/30 transform hover:-translate-y-1 transition-all flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>تسوق الآن</span>
+          <span class="text-xl">🥊</span>
+        </a>
+
+        <button 
+          onclick="toggleSizeGuideModal(true)" 
+          class="w-full sm:w-auto px-8 py-4 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 text-amber-300 font-extrabold text-base border border-amber-500/40 hover:border-amber-400 shadow-lg transform hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
+        >
+          <span>📏 دليل المقاسات</span>
+        </button>
+      </div>
+
+      <!-- Trust Badges Strip -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-4xl mx-auto pt-8 border-t border-zinc-800/80">
+        <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 flex items-center gap-3 text-right">
+          <div class="text-2xl text-amber-400">🛡️</div>
+          <div>
+            <div class="font-black text-sm text-white">100% حماية معتمدة</div>
+            <div class="text-[11px] text-zinc-400">معايير أمان دولية للنزال</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 flex items-center gap-3 text-right">
+          <div class="text-2xl text-amber-400">🥊</div>
+          <div>
+            <div class="font-black text-sm text-white">جلد طبيعي ورغوة جل</div>
+            <div class="text-[11px] text-zinc-400">امتصاص مضاعف للصدمات</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 flex items-center gap-3 text-right">
+          <div class="text-2xl text-amber-400">🚚</div>
+          <div>
+            <div class="font-black text-sm text-white">شحن سريع للمحافظات</div>
+            <div class="text-[11px] text-zinc-400">توصيل لباب الصالة أو المنزل</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 flex items-center gap-3 text-right">
+          <div class="text-2xl text-amber-400">💬</div>
+          <div>
+            <div class="font-black text-sm text-white">طلب مباشر بواتساب</div>
+            <div class="text-[11px] text-zinc-400">دفع نقدي عند الاستلام</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. CATEGORIES FILTER TABS & SEARCH SECTION
+       ========================================================================= -->
+  <section id="categories" class="py-12 bg-zinc-950 border-b border-zinc-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+        <div>
+          <div class="flex items-center gap-2 text-amber-400 text-xs font-black mb-1">
+            <span>⚡ أقسام العتاد التخصصية</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">
+            اختر فئة الحماية المناسبة لتدريبك
+          </h2>
+        </div>
+
+        <!-- Live Count Badge -->
+        <div id="productsCountBadge" class="px-4 py-1.5 rounded-full bg-zinc-900 border border-amber-500/30 text-amber-300 font-extrabold text-xs">
+          تحميل المنتجات...
+        </div>
+      </div>
+
+      <!-- Categories Tabs -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-4 no-scrollbar">
+        <button 
+          data-category-tab="all" 
+          onclick="setCategory('all')" 
+          class="category-tab active px-5 py-2.5 rounded-xl text-sm font-black transition-all bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-lg shadow-amber-500/20 whitespace-nowrap cursor-pointer"
+        >
+          🏆 الكل (جميع المعدات)
+        </button>
+
+        <button 
+          data-category-tab="hand" 
+          onclick="setCategory('hand')" 
+          class="category-tab px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-zinc-900/90 text-zinc-300 hover:text-amber-400 border border-zinc-800 hover:border-amber-500/40 whitespace-nowrap cursor-pointer"
+        >
+          🥊 أوقية اليد (قفازات وأربطة النزال)
+        </button>
+
+        <button 
+          data-category-tab="leg" 
+          onclick="setCategory('leg')" 
+          class="category-tab px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-zinc-900/90 text-zinc-300 hover:text-amber-400 border border-zinc-800 hover:border-amber-500/40 whitespace-nowrap cursor-pointer"
+        >
+          🛡️ أوقية الرجل (حماة الساق والقدم)
+        </button>
+
+        <button 
+          data-category-tab="mouth" 
+          onclick="setCategory('mouth')" 
+          class="category-tab px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-zinc-900/90 text-zinc-300 hover:text-amber-400 border border-zinc-800 hover:border-amber-500/40 whitespace-nowrap cursor-pointer"
+        >
+          🦷 أوقية الفم (حماة الأسنان)
+        </button>
+
+        <button 
+          data-category-tab="head" 
+          onclick="setCategory('head')" 
+          class="category-tab px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-zinc-900/90 text-zinc-300 hover:text-amber-400 border border-zinc-800 hover:border-amber-500/40 whitespace-nowrap cursor-pointer"
+        >
+          👑 أوقية الدماغ / الرأس (خوذات وحماة الرأس)
+        </button>
+
+        <button 
+          data-category-tab="apparel" 
+          onclick="setCategory('apparel')" 
+          class="category-tab px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-zinc-900/90 text-zinc-300 hover:text-amber-400 border border-zinc-800 hover:border-amber-500/40 whitespace-nowrap cursor-pointer"
+        >
+          🥋 ملابس النزال والتدريب (Fightwear)
+        </button>
+      </div>
+
+      <!-- Search & Sorting Filter Strip -->
+      <div class="mt-6 p-4 rounded-2xl bg-zinc-900/70 border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        
+        <!-- Live Search Input -->
+        <div class="relative w-full sm:w-96">
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="ابحث بالاسم، المقاس، أو نوع الرياضة (ملاكمة، MMA)..." 
+            class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700/80 text-white placeholder-zinc-500 text-xs md:text-sm focus:outline-none focus:border-amber-500 transition-colors"
+          />
+          <span class="absolute left-3 top-3 text-zinc-500 text-sm">🔍</span>
+        </div>
+
+        <!-- Sort Filter -->
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+          <span class="text-xs font-bold text-zinc-400 whitespace-nowrap">ترتيب حسب:</span>
+          <select 
+            id="sortSelect" 
+            class="w-full sm:w-auto px-4 py-2 rounded-xl bg-zinc-950 border border-zinc-700 text-xs md:text-sm font-bold text-zinc-200 focus:outline-none focus:border-amber-500 cursor-pointer"
+          >
+            <option value="default">المقترح (الأحدث)</option>
+            <option value="rating">الأعلى تقييماً (آراء المقاتلين)</option>
+            <option value="price-low">السعر: من الأقل للأعلى</option>
+            <option value="price-high">السعر: من الأعلى للأقل</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. PRODUCTS GRID SECTION
+       ========================================================================= -->
+  <section id="products" class="py-16 bg-combat-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Grid Container (Populated by app.js) -->
+      <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. WHY GSTOOLS COMBAT STANDARDS
+       ========================================================================= -->
+  <section id="why-gstools" class="py-20 bg-zinc-950 border-t border-b border-zinc-800/80 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-amber-400 text-xs font-black tracking-wider uppercase bg-amber-500/10 px-3.5 py-1 rounded-full border border-amber-500/30">
+          معايير التصنيع الفولاذية
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-white mt-4 mb-4">
+          لماذا يختار أبطال النزال علامة <span class="text-gold-gradient">GStools</span>؟
+        </h2>
+        <p class="text-sm sm:text-base text-zinc-400 leading-relaxed">
+          في فنون القتال، لا مجال للخطأ. إصابة واحدة في اليد أو الساق قد تُبعدك عن الحلبة لشهور. لهذا طوّرنا معدات GStools لتكون خط دفاعك الأول.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="p-6 rounded-2xl bg-[#121216] border border-zinc-800 hover:border-amber-500/40 transition-all">
+          <div class="w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-3xl mb-4">
+            🦁
+          </div>
+          <h3 class="text-lg font-black text-white mb-2">جلد طبيعي معزز</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            نستخدم جلود بقرية عالية المتانة معالجة حرارياً لمقاومة التمزق والرطوبة، مما يضمن عمراً تشغيلياً مضاعفاً للقفازات والواقيات.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[#121216] border border-zinc-800 hover:border-amber-500/40 transition-all">
+          <div class="w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-3xl mb-4">
+            🛡️
+          </div>
+          <h3 class="text-lg font-black text-white mb-2">تقنية الجل الماص</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            طبقات رغوية متدرجة الكثافة محقونة بطبقة جل هلامي تشتت قوة الصدمة بعيداً عن المفاصل وعظام الوجه وقصبة الساق.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[#121216] border border-zinc-800 hover:border-amber-500/40 transition-all">
+          <div class="w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-3xl mb-4">
+            ⚙️
+          </div>
+          <h3 class="text-lg font-black text-white mb-2">تصميم تشريحي مريح</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            تم ضبط زاوية الإبهام والمعصم تشريحياً لمنع الالتواء وتوفير قبضة محكمة وطبيعية تسمح بتسديد لكمات بأقصى طاقة حركية.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[#121216] border border-zinc-800 hover:border-amber-500/40 transition-all">
+          <div class="w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-3xl mb-4">
+            🥊
+          </div>
+          <h3 class="text-lg font-black text-white mb-2">مختبرة في السبارينغ</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            كل منتج يخضع لمئات ساعات الاختبار العنيف في أندية الملاكمة والمواي تاي الاحترافية لضمان ثباته وكفاءته قبل طرحه للمقاتلين.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. TESTIMONIALS & COMBAT WARRIORS
+       ========================================================================= -->
+  <section class="py-16 bg-combat-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-2xl sm:text-3xl font-black text-white mb-3">
+          ماذا يقول الأبطال عن عتاد <span class="text-gold-gradient">GStools</span>؟
+        </h2>
+        <p class="text-xs sm:text-sm text-zinc-400">
+          تجارب حقيقية من مدربين ومقاتلين في بطولات الكيك بوكسينغ والملاكمة وMMA.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-1 text-amber-400 text-sm mb-3">⭐⭐⭐⭐⭐</div>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-medium">
+              "قفازات النمر الذهبي GS-Pro هي الأفضل بدون منازع من حيث دعم المعصم. بعد جلسات سبارينغ 12 جولة متواصلة، لم أشعر بأي ألم في مفاصل اليد. خامة مذهلة تستحق كل قرش."
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-zinc-800">
+            <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 font-black flex items-center justify-center text-sm">
+              ك.ط
+            </div>
+            <div>
+              <div class="font-bold text-xs text-white">كابتن طارق السعيد</div>
+              <div class="text-[11px] text-zinc-500">مدرب مواي تاي وبطل جمهورية سابق</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-1 text-amber-400 text-sm mb-3">⭐⭐⭐⭐⭐</div>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-medium">
+              "واقي قصبة الساق تيتان شيلد ثابت جداً ولا يدور حول الساق أثناء الركلات العالية مثل باقي الواقيات. امتصاص الصدمة مريح ومكنني من التدريب بكثافة دون كدمات."
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-zinc-800">
+            <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 font-black flex items-center justify-center text-sm">
+              م.ع
+            </div>
+            <div>
+              <div class="font-bold text-xs text-white">محمود عبد الرحمن</div>
+              <div class="text-[11px] text-zinc-500">لاعب كيك بوكسينغ (وزن متوسط)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-1 text-amber-400 text-sm mb-3">⭐⭐⭐⭐⭐</div>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-medium">
+              "الطلب عن طريق الواتساب كان سريع جداً واستلمت الشحنة في خلال 48 ساعة فقط. خوذة Apex تغطية كاملة مريحة جداً ومجال الرؤية فيها ممتاز داخل الحلبة."
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-zinc-800">
+            <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 font-black flex items-center justify-center text-sm">
+              ح.م
+            </div>
+            <div>
+              <div class="font-bold text-xs text-white">حمزة المصري</div>
+              <div class="text-[11px] text-zinc-500">مقاتل MMA هاوي</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. FAQ SECTION
+       ========================================================================= -->
+  <section id="faq" class="py-16 bg-zinc-950 border-t border-zinc-800/80">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <span class="text-amber-400 text-xs font-black">إجابات واضحة</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-white mt-1">الأسئلة الشائعة</h2>
+      </div>
+
+      <div class="space-y-4">
+        
+        <details class="group bg-zinc-900/60 border border-zinc-800 rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+          <summary class="flex items-center justify-between font-black text-sm text-white group-hover:text-amber-400 transition-colors">
+            <span>كيف تتم عملية الشراء والدفع؟</span>
+            <span class="text-amber-400 text-lg group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-4 text-xs text-zinc-400 leading-relaxed">
+            ببساطة، أضف المنتجات التي ترغب بها إلى السلة واضغط على "إتمام الطلب عبر واتساب". سيتم إنشاء رسالة مفصلة بالمنتجات والأسعار وعنوانك مباشرة، وتتواصل مع فريق المبيعات لتأكيد موعد التوصيل والدفع نقداً عند الاستلام.
+          </p>
+        </details>
+
+        <details class="group bg-zinc-900/60 border border-zinc-800 rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+          <summary class="flex items-center justify-between font-black text-sm text-white group-hover:text-amber-400 transition-colors">
+            <span>كيف أختار المقاس المناسب لقفازات الملاكمة بالأوقية (Ounce)؟</span>
+            <span class="text-amber-400 text-lg group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-4 text-xs text-zinc-400 leading-relaxed">
+            - <strong>10oz:</strong> للسرعة ولكمات الأكياس الخفيفة والنزالات الرسمية.<br/>
+            - <strong>12oz:</strong> الخيار المتوازن للتدريب العام ولكمات كيس الملاكمة لأوزان تحت 70 كجم.<br/>
+            - <strong>14oz:</strong> الحجم القياسي الشامل للتدريب والسبارينغ الخفيف لأوزان 70-85 كجم.<br/>
+            - <strong>16oz:</strong> للسبارينغ القوي والمكثف وتوفير أقصى درجات الأمان لحماية شريك التدريب.
+          </p>
+        </details>
+
+        <details class="group bg-zinc-900/60 border border-zinc-800 rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+          <summary class="flex items-center justify-between font-black text-sm text-white group-hover:text-amber-400 transition-colors">
+            <span>ما هي طريقة استخدام واقي الأسنان الهلامي (Boil and Bite)؟</span>
+            <span class="text-amber-400 text-lg group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-4 text-xs text-zinc-400 leading-relaxed">
+            يُغمر الواقي في ماء مغلي لمدة 30-40 ثانية حتى تلين المادة الهلامية، ثم يوضع في ماء فاتر لثانية واحدة ويوضع فوراً على الأسنان العلوية مع العض برفق والضغط بالإبهام واللسان ليشكل قالباً متطابقاً تماماً مع أسنانك، ثم يُغسل بماء بارد ليتصلب.
+          </p>
+        </details>
+
+        <details class="group bg-zinc-900/60 border border-zinc-800 rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+          <summary class="flex items-center justify-between font-black text-sm text-white group-hover:text-amber-400 transition-colors">
+            <span>هل يتوفر استبدال أو استرجاع في حال لم يناسبني المقاس؟</span>
+            <span class="text-amber-400 text-lg group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-4 text-xs text-zinc-400 leading-relaxed">
+            نعم بالتأكيد! نوفر سياسة استبدال سلسة خلال 14 يوماً من استلام الشحنة بشرط بقاء المنتج في حالته وتغليفه الأصلي (مع مراعاة الشروط الصحية لواقيات الفم).
+          </p>
+        </details>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       9. FOOTER & SECRET ADMIN ACCESS TRIGGER
+       ========================================================================= -->
+  <footer class="bg-black border-t border-zinc-800/80 pt-16 pb-12 text-zinc-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-zinc-900">
+        
+        <!-- Brand Info & Secret Trigger Clicker -->
+        <div class="md:col-span-1">
+          <div class="flex items-center gap-3 mb-4">
+            <!-- Secret Trigger on Brand Logo (Click 5 times) -->
+            <div 
+              onclick="onSecretBadgeClick()" 
+              class="w-10 h-10 rounded-lg overflow-hidden bg-zinc-900 border border-amber-500/40 p-0.5 cursor-pointer active:scale-90 transition-transform" 
+              title="GStools Official Emblem"
+            >
+              <img src="./assets/logo.jpeg" alt="" onerror="this.src='./assets/logo-alt.jpeg'" class="w-full h-full object-cover rounded" />
+            </div>
+            <span class="text-2xl font-black text-gold-gradient font-combatNum">GStools</span>
+          </div>
+          <p class="text-xs text-zinc-500 leading-relaxed mb-4">
+            العلامة التجارية المتخصصة في إنتاج وتوزيع عتاد وأوقية الفنون القتالية عالية الاعتمادية. صُنعت للأبطال والمحترفين.
+          </p>
+          <div class="text-[11px] text-zinc-600">
+            © 2026 GStools Combat Equipment. جميع الحقوق محفوظة.
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-sm font-black text-white mb-4">روابط سريعة</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#hero" class="hover:text-amber-400 transition-colors">الصفحة الرئيسية</a></li>
+            <li><a href="#products" class="hover:text-amber-400 transition-colors">تصفح المنتجات</a></li>
+            <li><a href="javascript:void(0)" onclick="toggleSizeGuideModal(true)" class="hover:text-amber-400 transition-colors">دليل مقاسات القفازات</a></li>
+            <li><a href="#why-gstools" class="hover:text-amber-400 transition-colors">معايير حماية GStools</a></li>
+            <li><a href="#faq" class="hover:text-amber-400 transition-colors">الأسئلة المتكررة</a></li>
+          </ul>
+        </div>
+
+        <!-- Categories Links -->
+        <div>
+          <h4 class="text-sm font-black text-white mb-4">أقسام العتاد</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#products" onclick="setCategory('hand')" class="hover:text-amber-400 transition-colors">أوقية اليد وقفازات الملاكمة</a></li>
+            <li><a href="#products" onclick="setCategory('wraps')" class="hover:text-amber-400 transition-colors">أربطة اليد القطنية والجل</a></li>
+            <li><a href="#products" onclick="setCategory('apparel')" class="hover:text-amber-400 transition-colors">ملابس قتالية رياضية وراش جارد</a></li>
+            <li><a href="#products" onclick="setCategory('leg')" class="hover:text-amber-400 transition-colors">واقيات الساق والقدم</a></li>
+            <li><a href="#products" onclick="setCategory('mouth')" class="hover:text-amber-400 transition-colors">واقيات الأسنان المزدوجة</a></li>
+            <li><a href="#products" onclick="setCategory('head')" class="hover:text-amber-400 transition-colors">خوذات حماية الرأس 360°</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact & Secret Hash Link -->
+        <div>
+          <h4 class="text-sm font-black text-white mb-4">تواصل وخدمة العملاء</h4>
+          <p class="text-xs text-zinc-400 leading-relaxed mb-3">
+            فريق الدعم متاح يومياً لتلقي استفساراتكم حول المقاسات والطلبات الخاصة بالأندية والصالات الرياضية.
+          </p>
+          <div class="flex items-center gap-2 text-xs text-amber-400 font-bold mb-4">
+            <span>💬 خدمة الواتساب:</span>
+            <span class="num-combat">مباشر عبر الموقع</span>
+          </div>
+
+          <!-- Secret Admin Shortcut Hint -->
+          <div class="pt-4 border-t border-zinc-900">
+            <a 
+              href="#admin-gs" 
+              onclick="openAdminAuthModal()" 
+              class="text-[10px] text-zinc-700 hover:text-zinc-500 transition-colors flex items-center gap-1"
+            >
+              <span>🔒 بوابة إدارة المتجر (Ctrl + Alt + A)</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Credits -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-600 gap-4">
+        <div>صُمم وطُوّر بأعلى معايير الأداء والسرعة لمقاتلي الشرق الأوسط وشمال أفريقيا 🥊</div>
+        <div class="flex items-center gap-4 text-zinc-500">
+          <span>دفع آمن</span>
+          <span>•</span>
+          <span>شحن محلي</span>
+          <span>•</span>
+          <span>ضمان الجودة</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       10. CART DRAWER (SLIDE-OVER FROM LEFT/RIGHT)
+       ========================================================================= -->
+  <div 
+    id="cartBackdrop" 
+    onclick="toggleCartDrawer(false)" 
+    class="fixed inset-0 modal-backdrop z-50 hidden opacity-0 transition-opacity duration-300"
+  ></div>
+
+  <div 
+    id="cartDrawer" 
+    class="fixed top-0 bottom-0 left-0 w-full sm:w-[440px] bg-zinc-950 border-r border-zinc-800 z-50 transform -translate-x-full cart-drawer flex flex-col shadow-2xl"
+  >
+    <!-- Drawer Header -->
+    <div class="p-5 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/60">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">🛒</span>
+        <h3 class="font-black text-base text-white">سلة المشتريات</h3>
+        <span id="cartDrawerCount" class="text-xs text-amber-400 font-bold">(0)</span>
+      </div>
+      <button 
+        onclick="toggleCartDrawer(false)" 
+        class="w-8 h-8 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center text-sm transition-colors"
+      >
+        ✕
+      </button>
+    </div>
+
+    <!-- Items List Container -->
+    <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <!-- Items dynamically rendered -->
+    </div>
+
+    <!-- Order Summary & Checkout Action -->
+    <div class="p-5 border-t border-zinc-800 bg-zinc-950 space-y-3">
+      
+      <!-- Promo Code Box -->
+      <div class="flex items-center gap-2">
+        <input 
+          type="text" 
+          id="couponInput" 
+          placeholder="كوبون الخصم (مثال: GS10)" 
+          class="flex-1 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white uppercase placeholder-zinc-500 focus:outline-none focus:border-amber-500 font-mono"
+        />
+        <button 
+          onclick="applyCoupon()" 
+          class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-amber-300 font-bold text-xs border border-amber-500/30 transition-all cursor-pointer whitespace-nowrap"
+        >
+          تطبيق
+        </button>
+      </div>
+
+      <!-- Financial Calculation Rows -->
+      <div class="space-y-2 pt-2 border-t border-zinc-800/80 text-xs">
+        <div class="flex items-center justify-between text-zinc-400">
+          <span>مجموع الأصناف:</span>
+          <span id="cartItemsCount" class="font-bold text-zinc-300 num-combat">0 قطع</span>
+        </div>
+        <div class="flex items-center justify-between text-zinc-400">
+          <span>قيمة العتاد:</span>
+          <span id="cartSubtotal" class="font-bold text-zinc-200 num-combat">0 ج.م</span>
+        </div>
+        <div id="cartDiscountRow" class="hidden flex items-center justify-between text-emerald-400 font-bold">
+          <span id="cartDiscountLabel">خصم الكوبون:</span>
+          <span id="cartDiscountAmount" class="num-combat">-0 ج.م</span>
+        </div>
+        <div class="flex items-center justify-between text-zinc-400">
+          <span>مصاريف الشحن للمحافظات:</span>
+          <span id="cartShipping" class="font-bold text-zinc-200 num-combat">50 ج.م</span>
+        </div>
+        <div class="flex items-center justify-between text-sm font-black text-white pt-2.5 border-t border-zinc-800">
+          <span class="text-amber-400">الإجمالي الكلي:</span>
+          <span id="cartTotal" class="text-base font-black text-amber-400 num-combat">0 ج.م</span>
+        </div>
+      </div>
+
+      <div class="p-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 text-[11px] text-zinc-400 leading-relaxed flex items-center gap-2">
+        <span class="text-amber-400 text-sm">💬</span>
+        <span>طلب وتأكيد فوري عبر واتساب • الدفع نقداً عند الاستلام.</span>
+      </div>
+
+      <button 
+        id="btnProceedCheckout"
+        onclick="openCheckoutModal()" 
+        disabled
+        class="w-full py-3.5 rounded-xl font-black text-sm bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-black shadow-xl shadow-amber-500/20 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 cursor-pointer"
+      >
+        <span>💬 إتمام الطلب عبر واتساب</span>
+      </button>
+
+      <button 
+        onclick="clearCart()" 
+        class="w-full text-center text-[11px] text-zinc-500 hover:text-red-400 transition-colors pt-0.5 cursor-pointer"
+      >
+        تفريغ السلة
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       11. CHECKOUT FORM MODAL
+       ========================================================================= -->
+  <div 
+    id="checkoutModal" 
+    class="fixed inset-0 modal-backdrop z-50 hidden opacity-0 flex items-center justify-center p-4 transition-opacity duration-300"
+  >
+    <div class="w-full max-w-lg bg-[#13131a] rounded-2xl border border-amber-500/40 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+      
+      <div class="flex items-center justify-between mb-6 pb-3 border-b border-zinc-800">
+        <div class="flex items-center gap-2.5">
+          <span class="text-2xl">🦁</span>
+          <div>
+            <h3 class="font-black text-lg text-white">تأكيد طلب العتاد</h3>
+            <p class="text-xs text-zinc-400">سيتم إرسال الطلب مباشرة إلى محادثة واتساب الرسمية</p>
+          </div>
+        </div>
+        <button 
+          onclick="closeCheckoutModal()" 
+          class="w-8 h-8 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center text-sm"
+        >
+          ✕
+        </button>
+      </div>
+
+      <form onsubmit="submitWhatsAppOrder(event)" class="space-y-4">
+        
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 mb-1.5">اسم البطل / المشتري بالكامل *</label>
+          <input 
+            type="text" 
+            id="checkoutName" 
+            required 
+            placeholder="مثال: أحمد عبد الله" 
+            class="w-full px-4 py-2.5 rounded-xl custom-input text-xs sm:text-sm"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 mb-1.5">رقم الهاتف والواتساب *</label>
+          <input 
+            type="tel" 
+            id="checkoutPhone" 
+            required 
+            placeholder="مثال: 01012345678" 
+            class="w-full px-4 py-2.5 rounded-xl custom-input text-xs sm:text-sm font-combatNum text-right"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 mb-1.5">المدينة / المحافظة *</label>
+            <input 
+              type="text" 
+              id="checkoutCity" 
+              required 
+              placeholder="مثال: القاهرة / الإسكندرية" 
+              class="w-full px-4 py-2.5 rounded-xl custom-input text-xs sm:text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 mb-1.5">العنوان بالتفصيل *</label>
+            <input 
+              type="text" 
+              id="checkoutAddress" 
+              required 
+              placeholder="الشارع، رقم المبنى، الشقة" 
+              class="w-full px-4 py-2.5 rounded-xl custom-input text-xs sm:text-sm"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 mb-1.5">ملاحظات إضافية أو تفضيل المقاس (اختياري)</label>
+          <textarea 
+            id="checkoutNotes" 
+            rows="2" 
+            placeholder="أي تفاصيل ترغب بإبلاغ المتجر بها بخصوص الطلب والتوصيل..." 
+            class="w-full px-4 py-2 rounded-xl custom-input text-xs"
+          ></textarea>
+        </div>
+
+        <!-- Order items preview -->
+        <div class="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2 text-xs">
+          <div class="flex items-center justify-between text-zinc-300">
+            <span>عدد القطع المطلوبة:</span>
+            <span id="checkoutItemsCount" class="font-bold text-amber-400 num-combat text-sm">0 قطع</span>
+          </div>
+          <div class="flex items-center justify-between text-zinc-300">
+            <span>إجمالي الطلب مع الشحن:</span>
+            <span id="checkoutTotalPrice" class="font-black text-amber-400 num-combat text-sm">0 ج.م</span>
+          </div>
+          <div class="text-[11px] text-zinc-500 pt-1 border-t border-zinc-800/80">
+            🚚 الدفع عند الاستلام بعد معاينة العتاد والتأكد من المقاس والجودة.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          id="btnConfirmOrder"
+          class="w-full py-3.5 rounded-xl font-black text-sm bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>✅ تأكيد الطلب وإرساله عبر واتساب</span>
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       12. ORDER SUCCESS MODAL
+       ========================================================================= -->
+  <div 
+    id="orderSuccessModal" 
+    class="fixed inset-0 modal-backdrop z-50 hidden opacity-0 flex items-center justify-center p-4 transition-opacity duration-300"
+  >
+    <div class="w-full max-w-md bg-[#13131a] rounded-2xl border border-amber-500/50 p-6 sm:p-8 text-center shadow-2xl relative">
+      <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400 text-4xl flex items-center justify-center animate-bounce">
+        ✓
+      </div>
+      <h3 class="text-2xl font-black text-white mb-2">تم تجهيز طلبك بنجاح! 🦁</h3>
+      <p class="text-xs text-zinc-300 leading-relaxed mb-4">
+        تم تحويلك إلى محادثة واتساب الرسمية مع تفاصيل الطلب. سيتواصل معك ممثل المتجر لتأكيد موعد الشحن.
+      </p>
+      
+      <div class="p-3 bg-zinc-900 rounded-xl border border-zinc-800 mb-6 flex items-center justify-between text-xs">
+        <span class="text-zinc-400 font-bold">رقم الطلب:</span>
+        <span id="successOrderId" class="text-amber-400 font-black">#GS-000000</span>
+      </div>
+
+      <button 
+        onclick="closeOrderSuccessModal()" 
+        class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-black text-sm shadow-lg hover:from-amber-400 transition-all"
+      >
+        العودة للمتجر
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       13. PRODUCT QUICK VIEW MODAL
+       ========================================================================= -->
+  <div 
+    id="quickViewModal" 
+    class="fixed inset-0 modal-backdrop z-50 hidden opacity-0 flex items-center justify-center p-4 transition-opacity duration-300"
+  >
+    <div class="w-full max-w-2xl bg-[#13131a] rounded-2xl border border-amber-500/40 p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      
+      <button 
+        onclick="closeProductQuickView()" 
+        class="absolute top-4 left-4 w-8 h-8 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center text-sm z-10"
+      >
+        ✕
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Image Preview -->
+        <div class="w-full h-64 md:h-full min-h-[240px] rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 relative">
+          <img id="qvImage" src="" alt="" class="w-full h-full object-cover object-center" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        </div>
+
+        <!-- Details -->
+        <div class="flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span id="qvCategory" class="text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded"></span>
+              <div class="flex items-center gap-1 text-xs text-amber-400 font-bold">
+                <span>⭐</span>
+                <span id="qvRating" class="num-combat"></span>
+                <span id="qvReviews" class="text-zinc-500 text-[11px]"></span>
+              </div>
+            </div>
+
+            <h3 id="qvName" class="text-lg font-black text-white mb-2 leading-snug"></h3>
+            
+            <!-- Price Display in Quick View -->
+            <div class="flex items-center gap-3 mb-3 p-3 rounded-xl bg-zinc-900/90 border border-zinc-800">
+              <span id="qvPrice" class="text-2xl font-black text-amber-400 num-combat">0 ج.م</span>
+              <span id="qvOldPrice" class="text-sm text-zinc-500 line-through num-combat hidden"></span>
+              <span id="qvDiscountBadge" class="text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded hidden"></span>
+            </div>
+
+            <div class="mb-4">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                جاهز للطلب والشحن المباشر عبر واتساب
+              </span>
+            </div>
+
+            <p id="qvDescription" class="text-xs text-zinc-300 leading-relaxed mb-5"></p>
+
+            <!-- Size Selector -->
+            <div class="mb-4">
+              <span class="block text-xs font-bold text-zinc-400 mb-2">المقاس / الوزن المتاح:</span>
+              <div id="qvSizesContainer" class="flex flex-wrap gap-2"></div>
+            </div>
+
+            <!-- Colors Available Selector -->
+            <div class="mb-6">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-zinc-400">اللون المتاح للواقي:</span>
+                <span id="qvSelectedColorText" class="text-xs font-black text-amber-400"></span>
+              </div>
+              <div id="qvColorsContainer" class="flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+          <!-- Add to Cart CTA -->
+          <button 
+            onclick="addQuickViewToCart()" 
+            class="w-full py-3.5 rounded-xl font-black text-sm bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 text-black shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span>🛒 إضافة المنتج للسلة الآن</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       14. FIGHTER SIZE GUIDE MODAL
+       ========================================================================= -->
+  <div 
+    id="sizeGuideModal" 
+    class="fixed inset-0 modal-backdrop z-50 hidden opacity-0 flex items-center justify-center p-4 transition-opacity duration-300"
+  >
+    <div class="w-full max-w-2xl bg-[#13131a] rounded-2xl border border-amber-500/40 p-6 shadow-2xl relative max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-zinc-800 mb-6">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">📏</span>
+          <h3 class="font-black text-lg text-white">دليل المقاسات الرسمي لأبطال GStools</h3>
+        </div>
+        <button onclick="toggleSizeGuideModal(false)" class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-300 flex items-center justify-center text-sm">✕</button>
+      </div>
+
+      <!-- Gloves Table -->
+      <div class="space-y-6 text-xs">
+        <div>
+          <h4 class="font-bold text-amber-400 text-sm mb-2">1. دليل أوزان قفازات الملاكمة (OZ):</h4>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-zinc-800 text-right">
+              <thead>
+                <tr class="bg-zinc-900 text-zinc-300">
+                  <th class="p-2.5 border border-zinc-800">الوزن (OZ)</th>
+                  <th class="p-2.5 border border-zinc-800">وزن المقاتل التقريبي</th>
+                  <th class="p-2.5 border border-zinc-800">الاستخدام الموصى به</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-zinc-800 text-zinc-400">
+                <tr><td class="p-2 border border-zinc-800 font-bold text-white">10 OZ</td><td class="p-2 border border-zinc-800">تحت 55 كجم</td><td class="p-2 border border-zinc-800">نزالات احترافية / سرعة وتركيز</td></tr>
+                <tr><td class="p-2 border border-zinc-800 font-bold text-white">12 OZ</td><td class="p-2 border border-zinc-800">55 - 70 كجم</td><td class="p-2 border border-zinc-800">تدريب عام / أكياس ملاكمة وميتات</td></tr>
+                <tr><td class="p-2 border border-zinc-800 font-bold text-white">14 OZ</td><td class="p-2 border border-zinc-800">70 - 85 كجم</td><td class="p-2 border border-zinc-800">سبارينغ تدريبي ووقاية شاملة</td></tr>
+                <tr><td class="p-2 border border-zinc-800 font-bold text-white">16 OZ</td><td class="p-2 border border-zinc-800">أكثر من 85 كجم</td><td class="p-2 border border-zinc-800">سبارينغ مكثف وحماية قصوى للشريك</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Shin Guards -->
+        <div>
+          <h4 class="font-bold text-amber-400 text-sm mb-2">2. واقيات الساق والقدم (Shin Guards):</h4>
+          <p class="text-zinc-400 mb-2">يتم قياس المسافة من أسفل صابونة الركبة وحتى مفصل الكاحل:</p>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="p-3 bg-zinc-900 rounded-xl border border-zinc-800">
+              <div class="font-black text-amber-400">Medium (M)</div>
+              <div class="text-[11px] text-zinc-400 mt-1">طول الساق 33 - 36 سم</div>
+            </div>
+            <div class="p-3 bg-zinc-900 rounded-xl border border-zinc-800">
+              <div class="font-black text-amber-400">Large (L)</div>
+              <div class="text-[11px] text-zinc-400 mt-1">طول الساق 37 - 40 سم</div>
+            </div>
+            <div class="p-3 bg-zinc-900 rounded-xl border border-zinc-800">
+              <div class="font-black text-amber-400">XL</div>
+              <div class="text-[11px] text-zinc-400 mt-1">طول الساق أكبر من 40 سم</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-zinc-800 text-center">
+        <button onclick="toggleSizeGuideModal(false)" class="px-6 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs">حسناً، فهمت</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       15. SECRET ADMIN AUTHENTICATION MODAL (PIN GATE)
+       ========================================================================= -->
+  <div 
+    id="adminAuthModal" 
+    class="fixed inset-0 modal-backdrop z-50 hidden opacity-0 flex items-center justify-center p-4 transition-opacity duration-300"
+  >
+    <div id="adminAuthCard" class="w-full max-w-sm bg-[#111116] rounded-2xl border-2 border-amber-500/60 p-6 shadow-2xl relative text-center">
+      
+      <button 
+        onclick="closeAdminAuthModal()" 
+        class="absolute top-4 left-4 w-7 h-7 rounded-lg bg-zinc-800 text-zinc-400 hover:text-white flex items-center justify-center text-xs"
+      >
+        ✕
+      </button>
+
+      <div class="w-14 h-14 mx-auto mb-3 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-2xl shadow-inner">
+        🔒
+      </div>
+
+      <h3 class="text-lg font-black text-white mb-1">بوابة إدارة GStools</h3>
+      <p class="text-[11px] text-zinc-400 mb-4">أدخل الرمز السري (Default PIN: 1234)</p>
+
+      <!-- PIN Input -->
+      <div class="mb-4">
+        <input 
+          type="password" 
+          id="adminPinInput" 
+          maxlength="6" 
+          readonly 
+          placeholder="••••" 
+          class="w-full text-center text-2xl tracking-[0.5em] font-black py-2.5 rounded-xl bg-black border border-amber-500/40 text-amber-400 focus:outline-none"
+        />
+      </div>
+
+      <!-- Keypad -->
+      <div class="grid grid-cols-3 gap-2 mb-4">
+        <button onclick="appendPin('1')" class="py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-black text-sm border border-zinc-800">1</button>
+        <button onclick="appendPin('2')" class="py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-black text-sm border border-zinc-800">2</button>
+        <button onclick="appendPin('3')" class="py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-black text-sm border border-zinc-800">3</button>
+        <button onclick="appendPin('4')" class="py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-black text-sm border border-zinc-800">4</button>
+        <button onclick="appendPin('5')" class="py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-black text-sm border border-zinc-800">5</button>
+        <button onclick="appendPin('6')" class="py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-black text-sm border border-zinc-800">6</button>
+        <button onclick="appendPin('7')" class="py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-black text-sm border border-zinc-800">7</button>
+        <button onclick="appendPin('8')" class="py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-black text-sm border border-zinc-800">8</button>
+        <button onclick="appendPin('9')" class="py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-black text-sm border border-zinc-800">9</button>
+        <button onclick="clearPin()" class="py-3 rounded-xl bg-red-950/60 hover:bg-red-900 text-red-300 font-bold text-xs border border-red-900">مسح</button>
+        <button onclick="appendPin('0')" class="py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-black text-sm border border-zinc-800">0</button>
+        <button onclick="verifyAdminPin()" class="py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-xs shadow-md">دخول</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       16. SECRET ADMIN DASHBOARD (FULL PANEL)
+       ========================================================================= -->
+  <div 
+    id="adminDashboardPanel" 
+    class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden opacity-0 transition-opacity duration-300 flex flex-col overflow-hidden"
+  >
+    <!-- Top Bar -->
+    <div class="h-16 border-b border-zinc-800 bg-zinc-950 px-6 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl">🦁</span>
+        <div>
+          <h2 class="font-black text-base text-white">لوحة تحكم إدارة المتجر | <span class="text-amber-400">GStools Pro</span></h2>
+          <span class="text-[10px] text-zinc-500">حفظ تلقائي محلي (LocalStorage)</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button 
+          onclick="exportStoreData()" 
+          class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs font-bold border border-zinc-700"
+        >
+          <span>📁 نسخة احتياطية</span>
+        </button>
+        <button 
+          onclick="closeAdminDashboard()" 
+          class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-black transition-colors"
+        >
+          خروج ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- Admin Body -->
+    <div class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto w-full">
+      
+      <!-- KPI Stats Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        
+        <div class="p-4 rounded-xl bg-[#13131a] border border-zinc-800">
+          <div class="text-xs text-zinc-400 mb-1">إجمالي المنتجات المعروضة</div>
+          <div id="kpiTotalProducts" class="text-2xl font-black text-amber-400 num-combat">0</div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-[#13131a] border border-zinc-800">
+          <div class="text-xs text-zinc-400 mb-1">طلبات الواتساب المسجلة</div>
+          <div id="kpiTotalOrders" class="text-2xl font-black text-emerald-400 num-combat">0</div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-[#13131a] border border-zinc-800">
+          <div class="text-xs text-zinc-400 mb-1">إجمالي القطع المطلوبة</div>
+          <div id="kpiTotalRevenue" class="text-2xl font-black text-amber-400 num-combat">0 قطعة</div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-[#13131a] border border-zinc-800">
+          <div class="text-xs text-zinc-400 mb-1">منتجات غير متوفرة</div>
+          <div id="kpiOutOfStock" class="text-2xl font-black text-red-400 num-combat">0</div>
+        </div>
+
+      </div>
+
+      <!-- Admin Tabs Navigation -->
+      <div class="flex items-center gap-3 border-b border-zinc-800 pb-2">
+        <button 
+          id="adminTabBtn-products" 
+          data-admin-tab-btn 
+          onclick="switchAdminTab('products')" 
+          class="px-5 py-2.5 rounded-xl font-black text-xs md:text-sm text-black bg-gradient-to-r from-amber-500 to-amber-600 shadow-lg shadow-amber-500/20"
+        >
+          🥊 إدارة المنتجات والعتاد
+        </button>
+
+        <button 
+          id="adminTabBtn-orders" 
+          data-admin-tab-btn 
+          onclick="switchAdminTab('orders')" 
+          class="px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-800 transition-all"
+        >
+          📋 سجل طلبات الواتساب
+        </button>
+
+        <button 
+          id="adminTabBtn-settings" 
+          data-admin-tab-btn 
+          onclick="switchAdminTab('settings')" 
+          class="px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-800 transition-all"
+        >
+          ⚙️ إعدادات المتجر ورقم الهاتف
+        </button>
+      </div>
+
+      <!-- ================= TAB 1: PRODUCTS ================= -->
+      <div id="adminTabContent-products" data-admin-tab-content class="space-y-4">
+        
+        <div class="flex items-center justify-between">
+          <h3 class="text-base font-black text-white">قائمة المنتجات الحالية</h3>
+          <button 
+            onclick="openAddProductModal()" 
+            class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 text-black font-black text-xs flex items-center gap-1.5 shadow"
+          >
+            <span>➕ إضافة منتج جديد</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-zinc-800 bg-[#121217]">
+          <table class="w-full text-right text-xs">
+            <thead class="bg-zinc-900/90 text-zinc-400 border-b border-zinc-800">
+              <tr>
+                <th class="p-3">المنتج والاسم</th>
+                <th class="p-3">الفئة</th>
+                <th class="p-3">السعر (ج.م)</th>
+                <th class="p-3">الألوان المتاحة للواقي</th>
+                <th class="p-3 text-center">حالة التوفر</th>
+                <th class="p-3 text-center">إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- ================= TAB 2: ORDERS LOG ================= -->
+      <div id="adminTabContent-orders" data-admin-tab-content class="hidden space-y-4">
+        
+        <div class="flex items-center justify-between">
+          <h3 class="text-base font-black text-white">سجل الطلبات الواردة من الموقع</h3>
+          <button 
+            onclick="clearAllOrders()" 
+            class="px-3 py-1.5 rounded-lg bg-red-950/60 hover:bg-red-900 text-red-300 font-bold text-xs border border-red-800"
+          >
+            مسح كافة الطلبات
+          </button>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-zinc-800 bg-[#121217]">
+          <table class="w-full text-right text-xs">
+            <thead class="bg-zinc-900/90 text-zinc-400 border-b border-zinc-800">
+              <tr>
+                <th class="p-3">رقم الطلب والتاريخ</th>
+                <th class="p-3">العميل والهاتف</th>
+                <th class="p-3">المحتويات</th>
+                <th class="p-3">الإجمالي مع الشحن</th>
+                <th class="p-3 text-center">الحالة</th>
+                <th class="p-3 text-center">إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="adminOrdersTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- ================= TAB 3: SETTINGS ================= -->
+      <div id="adminTabContent-settings" data-admin-tab-content class="hidden space-y-6">
+        
+        <div class="max-w-xl p-6 rounded-2xl bg-[#121217] border border-zinc-800 space-y-4">
+          <h3 class="font-black text-base text-white pb-2 border-b border-zinc-800">إعدادات المتجر وقنوات التواصل</h3>
+          
+          <form onsubmit="saveStoreSettings(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-zinc-300 mb-1">رقم هاتف الواتساب لاستقبال الطلبات (بدون +)</label>
+              <input 
+                type="text" 
+                id="settingsPhoneInput" 
+                placeholder="201012345678" 
+                class="w-full px-4 py-2.5 rounded-xl custom-input text-xs font-combatNum text-right"
+              />
+              <span class="text-[11px] text-zinc-500">مثال لمصر: 201012345678 - مثال للسعودية: 966501234567</span>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-zinc-300 mb-1">رمز العملة المعروض في المتجر</label>
+              <input 
+                type="text" 
+                id="settingsCurrencyInput" 
+                placeholder="ج.م" 
+                class="w-full px-4 py-2.5 rounded-xl custom-input text-xs"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-zinc-300 mb-1">رمز PIN السري للوحة الإدارة (4 أرقام أو أكثر)</label>
+              <input 
+                type="text" 
+                id="settingsPinInput" 
+                placeholder="1234" 
+                class="w-full px-4 py-2.5 rounded-xl custom-input text-xs font-combatNum text-right"
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-black text-xs shadow hover:from-amber-400 transition-all"
+            >
+              حفظ التعديلات
+            </button>
+          </form>
+        </div>
+
+        <!-- Factory Reset -->
+        <div class="max-w-xl p-6 rounded-2xl bg-red-950/20 border border-red-900/60 space-y-3">
+          <h4 class="font-black text-sm text-red-400">استعادة المنتجات الافتراضية الأصلية</h4>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            إذا قمت بحذف المنتجات أو ترغب في إعادة ضبط المتجر لحالته الأولى مع جميع الأقسام والمنتجات المعتمدة، اضغط على الزر أدناه.
+          </p>
+          <button 
+            onclick="resetCatalogToDefault()" 
+            class="px-5 py-2.5 rounded-xl bg-red-900/80 hover:bg-red-800 text-white font-black text-xs transition-colors"
+          >
+            🔄 استعادة الكتالوج الافتراضي
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       17. ADMIN PRODUCT FORM MODAL (ADD & EDIT)
+       ========================================================================= -->
+  <div 
+    id="adminProductFormModal" 
+    class="fixed inset-0 modal-backdrop z-50 hidden opacity-0 flex items-center justify-center p-4 transition-opacity duration-300"
+  >
+    <div class="w-full max-w-lg bg-[#121217] rounded-2xl border border-amber-500/50 p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between pb-3 border-b border-zinc-800 mb-4">
+        <h3 id="productModalTitle" class="font-black text-base text-white">إضافة منتج جديد</h3>
+        <button onclick="closeProductFormModal()" class="w-7 h-7 rounded-lg bg-zinc-800 text-zinc-300 text-xs">✕</button>
+      </div>
+
+      <form onsubmit="saveProductFromForm(event)" class="space-y-3">
+        
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 mb-1">اسم المنتج بالعربية *</label>
+          <input type="text" id="prodFormName" required class="w-full px-3 py-2 rounded-xl custom-input text-xs" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 mb-1">الاسم بالإنجليزية (اختياري)</label>
+          <input type="text" id="prodFormNameEn" class="w-full px-3 py-2 rounded-xl custom-input text-xs" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 mb-1">القسم / الفئة *</label>
+            <select id="prodFormCategory" class="w-full px-3 py-2 rounded-xl custom-input text-xs">
+              <option value="hand">أوقية اليد (قفازات وأربطة النزال)</option>
+              <option value="leg">أوقية الرجل (حماة الساق والقدم)</option>
+              <option value="mouth">أوقية الفم (حماة الأسنان)</option>
+              <option value="head">أوقية الرأس (Headgear)</option>
+              <option value="apparel">ملابس قتالية وشورتات (Apparel)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 mb-1">شارة مميزة (Badge)</label>
+            <input type="text" id="prodFormBadge" placeholder="الأكثر مبيعاً 🔥" class="w-full px-3 py-2 rounded-xl custom-input text-xs" />
+          </div>
+        </div>
+
+        <!-- Prices in EGP -->
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-amber-300 mb-1">سعر البيع (بالجنيه ج.م) *</label>
+            <input type="number" id="prodFormPrice" required min="1" placeholder="مثال: 1250" class="w-full px-3 py-2 rounded-xl custom-input text-xs font-combatNum text-right" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-400 mb-1">السعر القديم قبل الخصم (اختياري)</label>
+            <input type="number" id="prodFormOldPrice" min="0" placeholder="مثال: 1550" class="w-full px-3 py-2 rounded-xl custom-input text-xs font-combatNum text-right" />
+          </div>
+        </div>
+
+        <!-- Product Image Drag & Drop Uploader -->
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="block text-xs font-bold text-amber-300">صورة العتاد القتالي * (سحب وإفلات فوري 📸)</label>
+            <span class="text-[10px] text-zinc-400">اسحب الملف من جهازك مباشرة</span>
+          </div>
+
+          <!-- Hidden File Input -->
+          <input 
+            type="file" 
+            id="prodFormFileInput" 
+            accept="image/*" 
+            class="hidden" 
+            onchange="handleImageFileSelect(this.files)" 
+          />
+
+          <!-- Drag and Drop Dropzone -->
+          <div 
+            id="prodDropZone" 
+            onclick="document.getElementById('prodFormFileInput').click()"
+            class="dropzone-combat border-2 border-dashed border-zinc-700/80 hover:border-amber-500 rounded-2xl p-5 bg-zinc-950/70 text-center cursor-pointer relative group transition-all"
+          >
+            <!-- Default Prompt (Visible when no image or when idle) -->
+            <div id="dropZonePrompt" class="flex flex-col items-center justify-center gap-2">
+              <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-3xl text-amber-400 group-hover:scale-110 dropzone-pulse transition-transform">
+                📥
+              </div>
+              <div>
+                <p class="text-xs sm:text-sm font-black text-white group-hover:text-amber-400 transition-colors">
+                  اسحب صورة المنتج وأفلتها هنا مباشرة
+                </p>
+                <p class="text-[11px] text-zinc-400 mt-0.5">
+                  أو انقر لاختيار الصورة من جهازك (PNG, JPG, WEBP, SVG)
+                </p>
+              </div>
+              <span class="inline-flex items-center gap-1 text-[10px] font-bold text-amber-400/90 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20">
+                ⚡ تحسين وتصغير تلقائي للحجم للمحافظة على سرعة الموقع
+              </span>
+            </div>
+
+            <!-- Image Preview Box (Shown when image loaded) -->
+            <div id="dropZonePreview" class="hidden flex flex-col sm:flex-row items-center gap-4 text-right">
+              <div class="relative w-24 h-24 rounded-xl overflow-hidden bg-black border-2 border-amber-500/60 shadow-lg shrink-0">
+                <img id="dropZonePreviewImg" src="" alt="معاينة العتاد" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1.5 text-xs font-black text-emerald-400 mb-1">
+                  <span>✓</span>
+                  <span>تم تجهيز وضبط الصورة بنجاح</span>
+                </div>
+                <div id="dropZoneFileName" class="text-xs font-bold text-white truncate max-w-xs mb-0.5">صورة_المنتج.png</div>
+                <div id="dropZoneFileSize" class="text-[10px] text-zinc-400 mb-2 num-combat">0 KB</div>
+                <div class="flex items-center gap-2">
+                  <button 
+                    type="button" 
+                    onclick="event.stopPropagation(); document.getElementById('prodFormFileInput').click()" 
+                    class="px-3 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-amber-300 text-[11px] font-bold border border-zinc-700 transition-colors cursor-pointer"
+                  >
+                    🔄 تغيير الصورة
+                  </button>
+                  <button 
+                    type="button" 
+                    onclick="event.stopPropagation(); removeDroppedImage()" 
+                    class="px-3 py-1 rounded-lg bg-red-950/60 hover:bg-red-900 text-red-300 text-[11px] font-bold border border-red-900 transition-colors cursor-pointer"
+                  >
+                    ✕ إزالة
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Real Image Value Input (Hidden) -->
+          <input 
+            type="hidden" 
+            id="prodFormImage" 
+            required 
+            value="" 
+          />
+
+          <!-- Optional Preset Library Toggle -->
+          <div class="mt-2 text-right">
+            <details class="text-xs text-zinc-400 group">
+              <summary class="cursor-pointer text-[11px] text-amber-400/90 hover:text-amber-300 font-bold select-none list-none flex items-center justify-between py-1">
+                <span>📁 أو اختر من مكتبة صور المتجر (89 صورة جاهزة)</span>
+                <span class="text-[10px] transform group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div class="pt-2 space-y-1.5">
+                <select 
+                  id="prodFormImagePreset" 
+                  onchange="handlePresetImageSelect(this.value)" 
+                  class="w-full px-3 py-2 rounded-xl custom-input text-xs cursor-pointer"
+                >
+                  <option value="">-- اختر من صور المتجر الجاهزة --</option>
+                </select>
+                <input 
+                  type="text" 
+                  id="prodFormImageManual" 
+                  placeholder="أو الصق رابط صورة خارجي (https://...)" 
+                  oninput="handleManualImageInput(this.value)"
+                  class="w-full px-3 py-1.5 rounded-xl custom-input text-xs font-mono text-left" 
+                  dir="ltr" 
+                />
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 mb-1">المقاسات المتاحة (مفصولة بفاصلة)</label>
+          <input type="text" id="prodFormSizes" placeholder="12oz, 14oz, 16oz أو M, L" class="w-full px-3 py-2 rounded-xl custom-input text-xs" />
+        </div>
+
+        <!-- Available Colors Field -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-xs font-bold text-amber-300">الألوان المتوفرة للواقي / المنتج (مفصولة بفاصلة) 🎨</label>
+            <span class="text-[10px] text-zinc-400">انقر للزيادة السريعة 👇</span>
+          </div>
+          <input type="text" id="prodFormColors" placeholder="أسود ملكي, ذهبي ميتاليك, أحمر قتالي" class="w-full px-3 py-2 rounded-xl custom-input text-xs" />
+          
+          <!-- Quick Preset Color Chips -->
+          <div class="flex items-center gap-1.5 flex-wrap mt-2">
+            <button type="button" onclick="appendColorToForm('أسود ملكي')" class="px-2 py-0.5 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-amber-400 text-[11px] text-zinc-300 flex items-center gap-1 cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-black border border-zinc-600"></span> + أسود ملكي
+            </button>
+            <button type="button" onclick="appendColorToForm('ذهبي ميتاليك')" class="px-2 py-0.5 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-amber-400 text-[11px] text-zinc-300 flex items-center gap-1 cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span> + ذهبي ميتاليك
+            </button>
+            <button type="button" onclick="appendColorToForm('أحمر قتالي')" class="px-2 py-0.5 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-amber-400 text-[11px] text-zinc-300 flex items-center gap-1 cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-red-600"></span> + أحمر قتالي
+            </button>
+            <button type="button" onclick="appendColorToForm('أزرق ملكي')" class="px-2 py-0.5 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-amber-400 text-[11px] text-zinc-300 flex items-center gap-1 cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-blue-600"></span> + أزرق ملكي
+            </button>
+            <button type="button" onclick="appendColorToForm('رمادي فولاذي')" class="px-2 py-0.5 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-amber-400 text-[11px] text-zinc-300 flex items-center gap-1 cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-slate-400"></span> + رمادي فولاذي
+            </button>
+            <button type="button" onclick="appendColorToForm('أبيض')" class="px-2 py-0.5 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-amber-400 text-[11px] text-zinc-300 flex items-center gap-1 cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-white border border-zinc-400"></span> + أبيض
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 mb-1">الوصف والمواصفات الفنية</label>
+          <textarea id="prodFormDesc" rows="3" class="w-full px-3 py-2 rounded-xl custom-input text-xs"></textarea>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-black text-xs shadow hover:from-amber-400 transition-all mt-4"
+        >
+          حفظ المنتج
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <div 
+    id="toastContainer" 
+    class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"
+  ></div>
+
+  <!-- Global Window Drag & Drop Overlay -->
+  <div 
+    id="globalDragOverlay" 
+    class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md border-4 border-dashed border-amber-400 flex flex-col items-center justify-center p-6 text-center opacity-0 pointer-events-none transition-all duration-200"
+  >
+    <div class="w-24 h-24 rounded-3xl bg-amber-500/20 border-2 border-amber-400 flex items-center justify-center text-5xl mb-4 shadow-2xl animate-bounce">
+      🦁
+    </div>
+    <h2 class="text-2xl sm:text-3xl font-black text-white mb-2 gold-glow-text">
+      أفلت صورة العتاد هنا مباشرة!
+    </h2>
+    <p class="text-sm font-bold text-amber-300 max-w-md">
+      سيتم تجهيز وضبط أبعاد الصورة وإدراجها فوراً في نموذج المنتج 🥊
+    </p>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
