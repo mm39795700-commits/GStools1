@@ -656,11 +656,64 @@ function saveCart() {
 }
 function saveOrders() {
   localStorage.setItem("gstools_orders", JSON.stringify(state.orders));
+  gsSupabase.auth.getSession().then(({ data }) => {
+    if (data.session) syncOrdersToSupabase();
+  }).catch(error => console.error("Supabase orders session check failed:", error));
 }
 function saveSettings() {
   localStorage.setItem("gstools_phone", state.storePhone);
   localStorage.setItem("gstools_pin", state.adminPin);
   localStorage.setItem("gstools_currency", state.currency);
+  gsSupabase.auth.getSession().then(({ data }) => {
+    if (data.session) syncSettingsToSupabase();
+  }).catch(error => console.error("Supabase settings session check failed:", error));
+}
+async function syncSettingsToSupabase() {
+  const values = {
+    storePhone: state.storePhone,
+    currency: state.currency
+  };
+  const { error } = await gsSupabase.from("gstools_settings").upsert(
+    Object.entries(values).map(([key, value]) => ({ key, value, updated_at: new Date().toISOString() })),
+    { onConflict: "key" }
+  );
+  if (error) { console.error("Supabase settings sync error:", error.message); return false; }
+  return true;
+}
+async function loadSettingsFromSupabase() {
+  const { data, error } = await gsSupabase.from("gstools_settings").select("key,value");
+  if (error) { console.error("Supabase settings load error:", error.message); return false; }
+  const values = Object.fromEntries((data || []).map(row => [row.key, row.value]));
+  if (typeof values.storePhone === "string" && values.storePhone) state.storePhone = values.storePhone;
+  if (typeof values.currency === "string" && values.currency) state.currency = values.currency;
+  saveSettingsLocalOnly();
+  renderProducts();
+  renderCartDrawer();
+  return true;
+}
+function saveSettingsLocalOnly() {
+  localStorage.setItem("gstools_phone", state.storePhone);
+  localStorage.setItem("gstools_pin", state.adminPin);
+  localStorage.setItem("gstools_currency", state.currency);
+}
+async function syncOrdersToSupabase() {
+  const { error } = await gsSupabase.from("gstools_orders").upsert(
+    state.orders.map(order => ({ order_code: String(order.id), data: order, status: order.status || "pending", total: Number(order.grandTotal) || 0, customer_name: order.customer?.name || "", phone: order.customer?.phone || "", items: order.items || [] })),
+    { onConflict: "order_code" }
+  );
+  if (error) { console.error("Supabase orders sync error:", error.message); return false; }
+  return true;
+}
+async function loadOrdersFromSupabase() {
+  const { data, error } = await gsSupabase.from("gstools_orders").select("data").order("created_at", { ascending: false });
+  if (error) { console.error("Supabase orders load error:", error.message); return false; }
+  if (data?.length) {
+    state.orders = data.map(row => row.data).filter(Boolean);
+    localStorage.setItem("gstools_orders", JSON.stringify(state.orders));
+    renderAdminOrdersTable();
+    renderAdminKPIs();
+  }
+  return true;
 } 
 async function syncProductsToSupabase() {
   const { error } = await gsSupabase
@@ -685,6 +738,48 @@ async function syncProductsToSupabase() {
   }
 
   return true;
+}
+async function uploadProductImageIfNeeded(imageValue) {
+  if (!imageValue || !imageValue.startsWith("data:")) return imageValue;
+  const { data: sessionData } = await gsSupabase.auth.getSession();
+  if (!sessionData.session) return imageValue;
+  try {
+    const response = await fetch(imageValue);
+    const blob = await response.blob();
+    const ext = blob.type === "image/png" ? "png" : blob.type === "image/svg+xml" ? "svg" : "jpg";
+    const path = "products/" + Date.now() + "-" + Math.random().toString(36).slice(2, 8) + "." + ext;
+    const { error } = await gsSupabase.storage.from("gstools-images").upload(path, blob, { contentType: blob.type || "image/jpeg", upsert: false });
+    if (error) throw error;
+    const { data } = gsSupabase.storage.from("gstools-images").getPublicUrl(path);
+    return data.publicUrl;
+  } catch (error) {
+    console.error("Supabase image upload failed:", error.message);
+    showToast("تعذر رفع الصورة للسحابة؛ سيتم الاحتفاظ بها محليًا مؤقتًا.", "warning");
+    return imageValue;
+  }
+}
+async function migrateProductImagesToCloud() {
+  let changed = false;
+  for (const product of state.products) {
+    if (product.image && product.image.startsWith("data:")) {
+      const uploaded = await uploadProductImageIfNeeded(product.image);
+      if (uploaded && !uploaded.startsWith("data:")) { product.image = uploaded; changed = true; }
+    }
+    if (product.colorImages && typeof product.colorImages === "object") {
+      for (const color of Object.keys(product.colorImages)) {
+        const value = product.colorImages[color];
+        if (typeof value === "string" && value.startsWith("data:")) {
+          const uploaded = await uploadProductImageIfNeeded(value);
+          if (uploaded && !uploaded.startsWith("data:")) { product.colorImages[color] = uploaded; changed = true; }
+        }
+      }
+    }
+  }
+  if (changed) {
+    localStorage.setItem("gstools_products", JSON.stringify(state.products));
+    await syncProductsToSupabase();
+    renderProducts();
+  }
 }
 async function loadProductsFromSupabase() {
   const { data, error } = await gsSupabase
@@ -1756,6 +1851,9 @@ async function verifyAdminPin() {
         const synced = await syncProductsToSupabase();
         if (!synced) throw new Error("تعذر حفظ المنتجات في قاعدة البيانات. راجع سياسات Supabase.");
       }
+      await migrateProductImagesToCloud();
+      await loadSettingsFromSupabase();
+      await loadOrdersFromSupabase();
 
       closeAdminAuthModal();
       openAdminDashboard();
@@ -1995,7 +2093,9 @@ function handleImageFileSelect(files) {
 
   showToast("جاري معالجة وضبط أبعاد الصورة... ⏳");
 
-  optimizeAndProcessImage(file, (dataUrl, fileName, sizeKb) => {
+  optimizeAndProcessImage(file, async (dataUrl, fileName, sizeKb) => {
+    const cloudUrl = await uploadProductImageIfNeeded(dataUrl);
+    if (cloudUrl && !cloudUrl.startsWith("data:")) dataUrl = cloudUrl;
     const hiddenInput = document.getElementById("prodFormImage");
     const previewBox = document.getElementById("dropZonePreview");
     const promptBox = document.getElementById("dropZonePrompt");
