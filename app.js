@@ -2044,14 +2044,21 @@ async function deleteProduct(id) {
   }
 
   // Mark inactive in the cloud first; only update the UI after Supabase confirms.
-  const { error } = await gsSupabase
+  const { data: deletedRow, error } = await gsSupabase
     .from("gstools_products")
     .update({ active: false, updated_at: new Date().toISOString() })
-    .eq("id", String(id));
+    .eq("id", String(id))
+    .select("id")
+    .maybeSingle();
 
-  if (error) {
-    console.error("GStools product deletion rejected by Supabase:", error);
-    showToast("لم يتم الحذف من قاعدة البيانات. افتح Console لمعرفة خطأ Supabase.", "error");
+  if (error || !deletedRow) {
+    console.error("GStools product deletion rejected or no row updated:", error || "No row returned; check owner login and Supabase UPDATE policy.");
+    showToast(
+      error
+        ? "فشل الحذف من قاعدة البيانات. تأكد من تسجيل دخول المالك وصلاحيات Supabase."
+        : "لم يتأكد الحذف من قاعدة البيانات؛ لم يتم تغيير قائمة المنتجات.",
+      "error"
+    );
     return;
   }
 
@@ -2061,7 +2068,7 @@ async function deleteProduct(id) {
   renderAdminKPIs();
   renderProducts();
   playSound("punch");
-  showToast("تم حذف المنتج من المتجر وقاعدة البيانات.");
+  showToast("تم تأكيد حذف المنتج من قاعدة البيانات.");
 }
 
 let editingProductId = null;
