@@ -2641,6 +2641,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // 2. Render local UI immediately; replace with cloud catalog when available.
   renderProducts();
   loadProductsFromSupabase().catch(error => console.error("Supabase catalog load failed:", error));
+  // Store settings are public-readable so every visitor gets the same WhatsApp number and currency.
+  loadSettingsFromSupabase().catch(error => console.error("Supabase settings load failed:", error));
   updateCartBadge();
   updateSoundIcon();
   initAdminImagePresets();
